@@ -11,7 +11,6 @@ const upload = multer({
         fileSize: 1000000
     },
     fileFilter(req, file, cb) {
-        console.log(file.originalname);
         if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
             return cb(new Error('Not a jpg or jpeg file'));
         }
@@ -54,7 +53,6 @@ router.post('/users/login', async (req, res) => {
         const token = await user.generateAuthToken();
         res.send( {user, token} );
     } catch (error) {
-        console.log(error )
         res.status(400).send(error);
     }
 });
@@ -182,6 +180,5 @@ router.get('/users/:id/avatar', async (req, res) => {
         res.status(404).send();
     }
 })
-
 
 module.exports = router;
